@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace Survey.Domain.Dtos
 {
-    public class OptionVoteResultDto
+    public class OptionVotePercentageDto
     {
         public int OptionId { get; set; }
         public string OptionTitle { get; set; }

@@ -7,10 +7,12 @@ namespace Survey.Domain.Contracts.Repositories
     public interface ISurveyRepository
     {
         void Add(SurveyAgg survey);
-        void Delete(int survetId);
+        bool Delete(int survetId);
         IReadOnlyCollection<SurveyListDto> GetAllSurveys();
         IReadOnlyCollection<SurveyListDto> GetAllActiveSurveys();
 
+        bool ExistsById(int surveyId);
 
+        bool? HasVotesBySurveyId(int surveyId)
     }
 }

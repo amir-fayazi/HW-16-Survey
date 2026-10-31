@@ -21,10 +21,19 @@ namespace Survey.Infrastructure.Repositories
 
         public int? GetParticipantCountBySurveyId(int surveyId)
         {
-           return _context.Surveys
+           var result = _context.Surveys
                 .Where(x => x.Id == surveyId)
-                .Select(x => x.SurveyParticipations.Count())
+                .Select(x => new
+                {
+                    Count = x.SurveyParticipations.Count()
+                })
                 .FirstOrDefault();
+
+            if (result is null)
+                return null;
+
+            return result.Count;
+            
         }
 
         public IReadOnlyCollection<SurveyParticipantDto>? GetParticipantsBySurveyId(int surveyId)
@@ -42,6 +51,7 @@ namespace Survey.Infrastructure.Repositories
                  .FirstOrDefault();
         }
     }
+
 }
 
 

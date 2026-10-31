@@ -1,7 +1,9 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using Survey.Domain.Contracts.Repositories;
 using Survey.Domain.Dtos;
+
 using Survey.Domain.Entities;
 using Survey.Domain.Enums;
 using Survey.Infrastructure.Persistence;
@@ -18,17 +20,17 @@ namespace Survey.Infrastructure.Repositories
         }
         public void Add(SurveyAgg survey)
         {
+            ArgumentNullException.ThrowIfNull(survey);
             _context.Surveys.Add(survey);
         }
 
-        public void Delete(int surveyId)
+        public bool Delete(int surveyId)
         {
-            var survey = GetById(surveyId);
+            var affectedRow = _context.Surveys
+                .Where(x => x.Id == surveyId)
+                .ExecuteDelete();
 
-            if (survey is null)
-                throw new KeyNotFoundException("Survey not found.");
-
-            _context.Surveys.Remove(survey);
+            return affectedRow > 0;
         }
 
         public IReadOnlyCollection<SurveyListDto> GetAllSurveys()
@@ -53,9 +55,29 @@ namespace Survey.Infrastructure.Repositories
                 .ToList();
         }
 
+        public bool ExistsById(int surveyId)
+        {
+            return _context.Surveys.Any(x => x.Id == surveyId);
+        }
+
         private SurveyAgg? GetById(int surveyId)
         {
             return _context.Surveys.SingleOrDefault(x => x.Id == surveyId);
+        }
+
+
+        public bool? HasVotesBySurveyId(int surveyId)
+        {
+           var result = _context.Surveys
+                .Where(x => x.Id == surveyId)
+                .Select(x => new
+                {
+                    HasVotes= x.Questions.Any(q => q.Votes.Any())
+                }
+                 )
+                .FirstOrDefault();
+               
+            return result?.HasVotes;
         }
     }
 }

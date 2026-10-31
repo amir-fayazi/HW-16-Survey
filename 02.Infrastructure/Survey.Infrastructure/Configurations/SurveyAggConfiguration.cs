@@ -8,7 +8,7 @@ namespace Survey.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<SurveyAgg> builder)
         {
-            throw new NotImplementedException();
+            //
         }
     }
 

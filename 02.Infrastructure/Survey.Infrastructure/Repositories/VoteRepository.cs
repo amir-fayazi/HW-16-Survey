@@ -16,9 +16,7 @@ namespace Survey.Infrastructure.Repositories
             _context = context;
         }
 
-
-
-        public IReadOnlyCollection<OptionVoteResultDto>? GetOptionVotePercentages(int questionId)
+        public IReadOnlyCollection<OptionVotePercentageDto>? GetOptionVotePercentages(int questionId)
         {
             var options = _context.Questions
                 .Where(q => q.Id == questionId)
@@ -49,15 +47,41 @@ namespace Survey.Infrastructure.Repositories
                 .ToList();
         }
 
-
-
-
         public int? GetVoteCountByOptionId(int optionId)
         {
-            return _context.Options
+            var result =  _context.Options
                  .Where(x => x.Id == optionId)
-                 .Select(x => x.Votes.Count())
+                 .Select(x => new
+                 {
+                     VoteCount = x.Votes.Count()
+                 })
                  .FirstOrDefault();
+
+            if (result is null)
+                return null;
+
+            return result.VoteCount;
+
+                
+        }
+
+        public IReadOnlyCollection<OptionVoteCountDto>? GetVoteCountByQuestionId(int questionId)
+        {
+            var result = 
+                _context.Questions
+                .Where(x => x.Id == questionId)
+                .Select(x => x.Options
+                    .Select(x => new OptionVoteCountDto
+                    {
+                        OptionId = x.Id,
+                        OptionTitle = x.Text,
+                        Count = x.Votes.Count()
+                    })
+                    .ToList())
+                .FirstOrDefault();
+
+            return result;
+
         }
 
 
