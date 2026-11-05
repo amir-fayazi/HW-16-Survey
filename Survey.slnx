@@ -9,4 +9,7 @@
   <Folder Name="/Src/03.Application/">
     <Project Path="03.Application/Survey.Application/Survey.Application.csproj" Id="cde54e37-e9be-43a4-9924-a3c51dd7bb09" />
   </Folder>
+  <Folder Name="/Src/04.Web/">
+    <Project Path="04.Survey/Survey.Web/Survey.Web.csproj" Id="a7057d98-10b1-4341-9942-c28a2303287b" />
+  </Folder>
 </Solution>

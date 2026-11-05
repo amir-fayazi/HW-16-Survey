@@ -13,6 +13,6 @@ namespace Survey.Domain.Contracts.Repositories
 
         bool ExistsById(int surveyId);
 
-        bool? HasVotesBySurveyId(int surveyId)
+        bool? HasVotesBySurveyId(int surveyId);
     }
 }

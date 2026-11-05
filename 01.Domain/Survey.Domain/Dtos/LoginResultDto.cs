@@ -1,7 +1,7 @@
 ﻿using Survey.Domain.Enums;
 
 
-namespace Survey.Application.Dtos
+namespace Survey.Domain.Dtos
 {
     public class LoginResultDto
     {

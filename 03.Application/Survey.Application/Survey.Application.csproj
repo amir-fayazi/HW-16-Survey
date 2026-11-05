@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\01.Domain\Survey.Domain\Survey.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>

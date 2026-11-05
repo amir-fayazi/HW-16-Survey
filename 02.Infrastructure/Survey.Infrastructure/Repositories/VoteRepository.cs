@@ -36,7 +36,7 @@ namespace Survey.Infrastructure.Repositories
             var totalVotes = options.Sum(x => x.OptionCount);
 
             return options
-                .Select(x => new OptionVoteResultDto
+                .Select(x => new OptionVotePercentageDto
                 {
                     OptionId = x.OptionId,
                     OptionTitle = x.OptionText,

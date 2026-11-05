@@ -1,5 +1,6 @@
 ﻿
 using Survey.Domain.Contracts.Repositories;
+using Survey.Domain.Dtos;
 using Survey.Domain.Entities;
 using Survey.Infrastructure.Persistence;
 
@@ -18,6 +19,9 @@ namespace Survey.Infrastructure.Repositories
             return _context.Persons.SingleOrDefault(x => x.Username == username);
         }
 
-
+        LoginResultDto IPersonRepository.GetByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
