@@ -36,7 +36,7 @@ namespace Survey.Infrastructure.Repositories
             
         }
 
-        public IReadOnlyCollection<SurveyParticipantDto>? GetParticipantsBySurveyId(int surveyId)
+/*        public IReadOnlyCollection<SurveyParticipantDto>? GetParticipantsBySurveyId(int surveyId)
         {
             return _context.Surveys
                  .AsNoTracking()
@@ -49,7 +49,7 @@ namespace Survey.Infrastructure.Repositories
                          ParticipatedAt = x.CreatedAt
                      }).ToList())
                  .FirstOrDefault();
-        }
+        }*/
     }
 
 }

@@ -9,7 +9,7 @@ namespace Survey.Domain.Contracts.Repositories
     {
         bool HasParticipatedInSurvey(int SurveyId, int personId);
         int? GetParticipantCountBySurveyId(int surveyId);
-        IReadOnlyCollection<SurveyParticipantDto>? GetParticipantsBySurveyId(int surveyId);
+       // IReadOnlyCollection<SurveyParticipantDto>? GetParticipantsBySurveyId(int surveyId);
         
     }
 }

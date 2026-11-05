@@ -1,5 +1,7 @@
-﻿
+﻿@using Survey.Domain.Dtos
 
+
+@model IReadOnlyCollection<SurveyListDto>
 @{
 
 
@@ -7,9 +9,32 @@
 
 
 <table class="table table-hover">
-    <tr>
-        <td>Id</td>
-        <td>Title</td>
-        <td>CreatedAt</td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var survey in Model)
+        {
+            <tr>
+                <td>@survey.Id</td>
+                <td>@survey.Title</td>
+                <td>
+                    <a 
+                    asp-controller="Surveys"
+                    asp-action="Participate"
+                    asp-route-id="@survey.Id"
+                    class="btn btn-outline-primary btn-sm">
+                        Participate
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    
 </table>

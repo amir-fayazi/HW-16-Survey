@@ -10,7 +10,7 @@ namespace Survey.Application.Contracts
     {
         int CreateSurvey(string title, SurveyStatus status);
 
-        IReadOnlyCollection<SurveyParticipantDto> GetParticipantsBySurveyId(int surveyId);
+        //IReadOnlyCollection<SurveyParticipantDto> GetParticipantsBySurveyId(int surveyId);
         int GetParticipantCountBySurveyId(int surveyId);
 
         void DeleteSurvey(int surveyId);

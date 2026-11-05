@@ -5,6 +5,7 @@ using Survey.Application.Exceptions;
 using Survey.Domain.Contracts;
 using Survey.Domain.Contracts.Repositories;
 using Survey.Domain.Dtos;
+using Survey.Domain.Dtos.Parcitipation;
 using Survey.Domain.Entities;
 using Survey.Domain.Enums;
 
@@ -70,14 +71,25 @@ namespace Survey.Application.Services
             return count.Value;
         }
 
-        public IReadOnlyCollection<SurveyParticipantDto> GetParticipantsBySurveyId(int surveyId)
+        /*        public IReadOnlyCollection<SurveyParticipantDto> GetParticipantsBySurveyId(int surveyId)
+                {
+                    var participants = _surveyParticipationRepo.GetParticipantsBySurveyId(surveyId);
+                    if (participants is null)
+                        throw new NotFoundException("Survey not found");
+
+                    return participants;
+                }*/
+
+
+
+        public SurveyVotingDto GetSurveyForVoting(int surveyId)
         {
-            var participants = _surveyParticipationRepo.GetParticipantsBySurveyId(surveyId);
-            if (participants is null)
+            var surveyVoting = _surveyRepo.GetSurveyWithQuestions(surveyId);
+
+            if (surveyVoting is null)
                 throw new NotFoundException("Survey not found");
 
-            return participants;
+            return surveyVoting;
         }
-
     }
 }

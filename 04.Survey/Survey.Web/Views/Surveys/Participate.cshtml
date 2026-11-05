@@ -1,0 +1,63 @@
+﻿@using Survey.Domain.Dtos.Parcitipation
+
+
+@model SurveyVotingDto
+
+
+@{
+}
+
+
+<section class="container py-5" dir="ltr">
+
+	<div class="card bg-dark text-white border-secondary rounded-4 shadow-lg">
+
+		<div class="card-body p-4 p-md-5">
+
+			<!-- Survey Header -->
+			<div class="mb-4 pb-3 border-bottom border-secondary">
+				<h2 class="fw-bold mb-3">
+					@Model.SurveyTitle
+				</h2>
+			</div>
+
+			<!-- Question 1 -->
+			@foreach (var question in Model.Questions)
+			{
+				<div class="border border-secondary rounded-3 p-4 mb-4">
+
+					<h5 class="fw-semibold mb-4">
+						Question 1: @question.QuestionText
+					</h5>
+
+					<div class="d-flex flex-nowrap gap-4 overflow-auto pb-2">
+
+						@foreach (var option in question.Options)
+						{
+
+							<div class="form-check form-check-inline flex-shrink-0">
+								<input class="form-check-input"
+									   type="radio"
+									   name="question1"
+									   id="option-@option.Id"
+									   value="CSharp">
+								<label class="form-check-label"
+									   for="option-@option.Id">
+									@option.OptionText
+								</label>
+							</div>
+						}
+
+
+					</div>
+				</div>
+			}
+			<!-- Question 2 -->
+
+			
+		</div>
+	</div>
+</section>
+
+
+

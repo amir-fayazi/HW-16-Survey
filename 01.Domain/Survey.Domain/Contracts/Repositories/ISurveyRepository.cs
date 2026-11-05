@@ -1,4 +1,5 @@
 ﻿using Survey.Domain.Dtos;
+using Survey.Domain.Dtos.Parcitipation;
 using Survey.Domain.Entities;
 
 
@@ -14,5 +15,8 @@ namespace Survey.Domain.Contracts.Repositories
         bool ExistsById(int surveyId);
 
         bool? HasVotesBySurveyId(int surveyId);
+
+        // -----------------------
+        SurveyVotingDto? GetSurveyWithQuestions(int surveyId);
     }
 }

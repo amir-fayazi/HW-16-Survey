@@ -1,9 +1,10 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using Survey.Application.Exceptions;
 using Survey.Domain.Contracts.Repositories;
 using Survey.Domain.Dtos;
-
+using Survey.Domain.Dtos.Parcitipation;
 using Survey.Domain.Entities;
 using Survey.Domain.Enums;
 using Survey.Infrastructure.Persistence;
@@ -51,7 +52,7 @@ namespace Survey.Infrastructure.Repositories
                 {
                     Id = x.Id,
                     Title = x.Title,
-                    CreatedAt = x.CreatedAt
+                    CreatedAt = x.CreatedAt,
                 })
                 .ToList();
         }
@@ -69,16 +70,44 @@ namespace Survey.Infrastructure.Repositories
 
         public bool? HasVotesBySurveyId(int surveyId)
         {
-           var result = _context.Surveys
-                .Where(x => x.Id == surveyId)
-                .Select(x => new
-                {
-                    HasVotes= x.Questions.Any(q => q.Votes.Any())
-                }
-                 )
-                .FirstOrDefault();
-               
+            var result = _context.Surveys
+                 .Where(x => x.Id == surveyId)
+                 .Select(x => new
+                 {
+                     HasVotes = x.Questions.Any(q => q.Votes.Any())
+                 }
+                  )
+                 .FirstOrDefault();
+
             return result?.HasVotes;
         }
+
+
+
+        public SurveyVotingDto? GetSurveyWithQuestions(int surveyId)
+        {
+            return _context.Surveys
+                 .Where(s => s.Id == surveyId && s.SurveyStatus == SurveyStatus.Active)
+                 .Select(s => new SurveyVotingDto
+                 {
+                     SurveyId = s.Id,
+                     SurveyTitle = s.Title,
+                     Questions = s.Questions
+                                  .Select(q => new QuestionDto
+                                  {
+                                      Id = q.Id,
+                                      QuestionText = q.Text,
+                                      Options = q.Options
+                                                         .Select(o => new OptionDto
+                                                         {
+                                                             Id = o.Id,
+                                                             OptionText = o.Text
+                                                         }).ToList()
+                                  }).ToList()
+                 })
+                 .FirstOrDefault();
+        }
+
+
     }
 }
