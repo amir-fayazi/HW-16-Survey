@@ -50,7 +50,8 @@ namespace Survey.Infrastructure.Repositories
                 .Select(x => new SurveyListDto
                 {
                     Id = x.Id,
-                    Title = x.Title
+                    Title = x.Title,
+                    CreatedAt = x.CreatedAt
                 })
                 .ToList();
         }

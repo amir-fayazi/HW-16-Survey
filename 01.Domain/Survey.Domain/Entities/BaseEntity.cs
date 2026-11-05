@@ -6,7 +6,7 @@ namespace Survey.Domain.Entities
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; private set; }
-        public DateTime DeletedAt { get; private set; }
+        //public DateTime? DeletedAt { get; private set; }
 
 
         protected BaseEntity()
