@@ -2,6 +2,8 @@
 using Survey.Application.Exceptions;
 using Survey.Application.Services;
 using Survey.Domain.Contracts.Repositories;
+using Survey.Domain.Dtos.Vote;
+using Survey.Domain.Entities;
 using Survey.Infrastructure.Persistence;
 using Survey.Infrastructure.Repositories;
 
@@ -20,8 +22,8 @@ namespace Survey.Web.Controllers
             var surveyService = new SurveyService(surveyRepository, unitOfWork, surveyParticipationRepository);
 
 
-            var surveys = surveyService.GetActiveSurveys();
-            return View(surveys);
+            var surveysDto = surveyService.GetActiveSurveys();
+            return View(surveysDto);
 
         }
 
@@ -44,11 +46,25 @@ namespace Survey.Web.Controllers
 
                 return NotFound("Survey not found!!!");
             }
+        }
 
+        public IActionResult SubmitVote(SubmitVoteDto submitVote)
+        {
+
+            return Json(new
+            {
+                submitVote.SurveyId,
+                submitVote.Answers
+            });
 
         }
 
- 
+        //public List<Vote> CreateVotes()
+        //{
+
+        //}
+
+
 
     }
 }
